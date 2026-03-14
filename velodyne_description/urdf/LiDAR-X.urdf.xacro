@@ -18,7 +18,8 @@
     max_horizontal_angle:=3.14159
     min_vertical_angle:=-0.523599
     max_vertical_angle:=0.523599
-    gpu:=false">
+    gpu:=false
+    visualize:=true">
 
     <joint name="${name}_base_mount_joint" type="fixed">
       <xacro:insert_block name="origin" /> 
@@ -32,16 +33,18 @@
         <origin xyz="0 0 0.03585"/>
         <inertia ixx="1e-7" ixy="0" ixz="0" iyy="1e-7" iyz="0" izz="1e-7"/>
       </inertial>
-      <visual>
-        <geometry>
-          <mesh filename="package://velodyne_description/meshes/VLP16_base_1.dae" />
-        </geometry>
-      </visual>
-      <visual>
-        <geometry>
-          <mesh filename="package://velodyne_description/meshes/VLP16_base_2.dae" />
-        </geometry>
-      </visual>
+      <xacro:if value="${visualize}">
+        <visual>
+          <geometry>
+            <mesh filename="package://velodyne_description/meshes/VLP16_base_1.dae" />
+          </geometry>
+        </visual>
+        <visual>
+          <geometry>
+            <mesh filename="package://velodyne_description/meshes/VLP16_base_2.dae" />
+          </geometry>
+        </visual>
+      </xacro:if>
       <collision>
         <origin rpy="0 0 0" xyz="0 0 0.03585"/>
         <geometry>
@@ -62,12 +65,14 @@
         <origin xyz="0 0 0"/>
         <inertia ixx="1e-7" ixy="0" ixz="0" iyy="1e-7" iyz="0" izz="1e-7"/>
       </inertial>
-      <visual>
-        <origin xyz="0 0 -0.0377" />
-        <geometry>
-          <mesh filename="package://velodyne_description/meshes/VLP16_scan.dae" />
-        </geometry>
-      </visual>
+      <xacro:if value="${visualize}">
+        <visual>
+          <origin xyz="0 0 -0.0377" />
+          <geometry>
+            <mesh filename="package://velodyne_description/meshes/VLP16_scan.dae" />
+          </geometry>
+        </visual>
+      </xacro:if>
     </link>
 
     <!-- Gazebo requires the velodyne_gazebo_plugins package -->
